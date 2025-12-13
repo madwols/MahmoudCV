@@ -158,7 +158,9 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.1;
+  white-space: nowrap;
 }
+
 
 .subtitle {
   font-size: 1.5rem;
