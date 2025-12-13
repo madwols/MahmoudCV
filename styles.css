@@ -60,6 +60,12 @@ body::before {
   border-bottom: 1px solid rgba(0, 212, 255, 0.1);
   padding: 1.2rem 0;
   box-shadow: 0 8px 32px rgba(0, 212, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.navbar.scrolled {
+  padding: 0.8rem 0;
+  box-shadow: 0 12px 40px rgba(0, 212, 255, 0.1);
 }
 
 .nav-container {
@@ -283,6 +289,7 @@ body::before {
   letter-spacing: 0.5px;
   position: relative;
   overflow: hidden;
+  touch-action: manipulation;
 }
 
 .btn::before {
@@ -297,7 +304,8 @@ body::before {
   z-index: -1;
 }
 
-.btn:hover::before {
+.btn:hover::before,
+.btn:focus::before {
   left: 100%;
 }
 
@@ -309,7 +317,8 @@ body::before {
   border: 1px solid rgba(0, 212, 255, 0.5);
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-primary:active {
   transform: translateY(-4px);
   box-shadow: 0 15px 40px rgba(0, 212, 255, 0.6),
               inset 0 1px 0 rgba(255, 255, 255, 0.3);
@@ -326,7 +335,8 @@ body::before {
   box-shadow: 0 0 20px rgba(0, 212, 255, 0.2);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+.btn-secondary:active {
   background: rgba(0, 212, 255, 0.15);
   transform: translateY(-4px);
   box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4),
@@ -405,7 +415,8 @@ section h2::after {
   cursor: pointer;
 }
 
-.info-block:hover {
+.info-block:hover,
+.info-block:active {
   border-left-color: var(--secondary);
   background: rgba(0, 212, 255, 0.1);
   transform: translateX(10px);
@@ -488,6 +499,7 @@ section h2::after {
   border-radius: 50%;
   top: 0;
   box-shadow: 0 0 20px rgba(0, 212, 255, 0.6);
+  transition: all 0.3s ease;
 }
 
 .exp-item:nth-child(odd)::before {
@@ -498,7 +510,8 @@ section h2::after {
   left: -51px;
 }
 
-.exp-item:hover::before {
+.exp-item:hover::before,
+.exp-item:active::before {
   width: 28px;
   height: 28px;
   background: var(--secondary);
@@ -514,7 +527,8 @@ section h2::after {
   cursor: pointer;
 }
 
-.exp-item:hover .exp-header {
+.exp-item:hover .exp-header,
+.exp-item:active .exp-header {
   background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(139, 0, 255, 0.08));
   border: 1px solid rgba(0, 212, 255, 0.4);
   box-shadow: 0 10px 40px rgba(0, 212, 255, 0.15);
@@ -529,7 +543,8 @@ section h2::after {
   transition: all 0.3s ease;
 }
 
-.exp-item:hover h3 {
+.exp-item:hover h3,
+.exp-item:active h3 {
   color: var(--secondary);
 }
 
@@ -569,7 +584,8 @@ section h2::after {
   margin-bottom: 0;
 }
 
-.exp-bullets li:hover {
+.exp-bullets li:hover,
+.exp-bullets li:active {
   color: var(--text-primary);
   transform: translateX(8px);
 }
@@ -599,7 +615,8 @@ section h2::after {
   cursor: pointer;
 }
 
-.skill-card:hover {
+.skill-card:hover,
+.skill-card:active {
   border-bottom: 3px solid var(--primary);
   background: rgba(0, 212, 255, 0.1);
   transform: translateY(-8px);
@@ -613,7 +630,8 @@ section h2::after {
   transition: color 0.3s ease;
 }
 
-.skill-card:hover h3 {
+.skill-card:hover h3,
+.skill-card:active h3 {
   color: var(--secondary);
 }
 
@@ -629,7 +647,8 @@ section h2::after {
   transition: all 0.3s ease;
 }
 
-.skill-card li:hover {
+.skill-card li:hover,
+.skill-card li:active {
   color: var(--text-primary);
   transform: translateX(5px);
 }
@@ -659,7 +678,8 @@ section h2::after {
   cursor: pointer;
 }
 
-.cert-item:hover {
+.cert-item:hover,
+.cert-item:active {
   border-bottom: 2px solid var(--accent);
   background: rgba(139, 0, 255, 0.12);
   transform: translateY(-5px);
@@ -679,7 +699,8 @@ section h2::after {
   transition: color 0.3s ease;
 }
 
-.cert-item:hover p {
+.cert-item:hover p,
+.cert-item:active p {
   color: var(--text-primary);
 }
 
@@ -698,9 +719,11 @@ section h2::after {
   font-size: 0.9rem;
   transition: all 0.3s ease;
   cursor: pointer;
+  touch-action: manipulation;
 }
 
-.badge:hover {
+.badge:hover,
+.badge:active {
   background: linear-gradient(135deg, var(--primary), var(--primary-dark));
   color: var(--bg-dark);
   transform: translateY(-3px);
@@ -724,7 +747,8 @@ section h2::after {
   cursor: pointer;
 }
 
-.lang-card:hover {
+.lang-card:hover,
+.lang-card:active {
   border-bottom: 3px solid var(--secondary);
   background: rgba(255, 0, 110, 0.12);
   transform: translateY(-8px);
@@ -738,7 +762,8 @@ section h2::after {
   transition: color 0.3s ease;
 }
 
-.lang-card:hover h3 {
+.lang-card:hover h3,
+.lang-card:active h3 {
   color: var(--primary);
 }
 
@@ -798,57 +823,71 @@ section h2::after {
   color: var(--primary);
 }
 
-/* ===== RESPONSIVE ===== */
-@media (max-width: 968px) {
-  .experience-list::before {
-    display: none;
+/* ===== MOBILE OPTIMIZATIONS ===== */
+
+/* Tablets (768px - 1024px) */
+@media (max-width: 1024px) {
+  .container {
+    padding: 0 1.5rem;
   }
 
-  .exp-item:nth-child(odd),
-  .exp-item:nth-child(even) {
-    margin-left: 0;
-    margin-right: 0;
-    text-align: left;
-    padding-left: 3rem;
-    padding-right: 0;
+  section {
+    padding: 4rem 0;
   }
 
-  .exp-item::before {
-    left: -51px !important;
-    right: auto;
+  section h2 {
+    font-size: 2rem;
   }
 }
 
+/* Mobile Portrait (480px - 768px) */
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.5rem;
+    margin-bottom: 0.8rem;
   }
 
   .subtitle {
     font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .hero-desc {
+    font-size: 1rem;
+    margin-bottom: 2rem;
   }
 
   .hero-metrics {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding: 1.5rem;
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+
+  .metric {
+    padding: 0.8rem;
   }
 
   .metric-number {
     font-size: 1.5rem;
+    margin-bottom: 0.3rem;
   }
 
   .metric-label {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 
   .cta-buttons {
     flex-direction: column;
     width: 100%;
+    gap: 1rem;
   }
 
   .btn {
     width: 100%;
+    padding: 0.9rem 1.5rem;
+    font-size: 0.95rem;
   }
 
   .about-grid,
@@ -856,71 +895,385 @@ section h2::after {
   .skills-grid,
   .lang-grid {
     grid-template-columns: 1fr;
+    gap: 1.5rem;
   }
 
   .nav-menu {
-    gap: 1rem;
-    font-size: 0.85rem;
+    gap: 1.2rem;
+    font-size: 0.8rem;
+  }
+
+  .nav-menu a {
+    padding: 0.3rem 0;
   }
 
   section h2 {
     font-size: 1.8rem;
+    margin-bottom: 2rem;
+  }
+
+  section h2::after {
+    width: 60px;
   }
 
   .hero {
-    padding: 2rem;
+    padding: 2rem 1rem;
+    min-height: auto;
   }
 
-  .exp-item {
-    margin-bottom: 3rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .hero h1 {
-    font-size: 2rem;
+  /* Experience Mobile */
+  .experience-list {
+    padding: 1rem 0;
   }
 
-  .subtitle {
-    font-size: 1rem;
+  .experience-list::before {
+    left: 0;
+    transform: translateX(0);
   }
 
-  .hero-metrics {
-    grid-template-columns: 1fr;
+  .exp-item,
+  .exp-item:nth-child(odd),
+  .exp-item:nth-child(even) {
+    margin-left: 0;
+    margin-right: 0;
+    text-align: left;
+    padding-left: 2.5rem;
+    padding-right: 0;
+    margin-bottom: 2.5rem;
   }
 
-  .metric-number {
-    font-size: 1.2rem;
+  .exp-item::before {
+    left: -42px !important;
+    right: auto;
+    width: 16px;
+    height: 16px;
+    border-width: 3px;
   }
 
-  .nav-menu {
-    gap: 0.5rem;
-    font-size: 0.75rem;
-  }
-
-  .hero {
-    padding: 1rem;
-  }
-
-  section {
-    padding: 3rem 0;
-  }
-
-  section h2 {
-    font-size: 1.5rem;
-  }
-
-  .skills-grid,
-  .lang-grid {
-    grid-template-columns: 1fr;
+  .exp-item:hover::before,
+  .exp-item:active::before {
+    width: 22px;
+    height: 22px;
   }
 
   .exp-header {
     padding: 1.5rem;
   }
 
+  .exp-item h3 {
+    font-size: 1.15rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .exp-company {
+    font-size: 0.85rem;
+  }
+
+  .exp-date {
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+  }
+
+  .exp-bullets {
+    margin-top: 1rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+    line-height: 1.6;
+  }
+
+  .skill-card {
+    padding: 1.5rem;
+  }
+
+  .skill-card h3 {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .skill-card li {
+    font-size: 0.9rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .cert-item {
+    padding: 1.2rem;
+  }
+
+  .cert-item h3 {
+    font-size: 1rem;
+  }
+
+  .cert-item p {
+    font-size: 0.85rem;
+  }
+
+  .badge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.85rem;
+  }
+
+  .lang-card {
+    padding: 1.5rem;
+  }
+
+  .lang-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .lang-card p {
+    font-size: 0.85rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+  }
+
+  .info-block {
+    padding: 1.2rem;
+  }
+
+  .info-block h3 {
+    font-size: 0.95rem;
+  }
+
+  .info-block p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile Landscape & Small Devices (360px - 480px) */
+@media (max-width: 480px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .hero-desc {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    max-width: 100%;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .metric {
+    padding: 0.6rem;
+  }
+
+  .metric-number {
+    font-size: 1.2rem;
+  }
+
+  .metric-label {
+    font-size: 0.65rem;
+    letter-spacing: 0;
+  }
+
+  .nav-menu {
+    gap: 0.8rem;
+    font-size: 0.75rem;
+  }
+
+  .nav-container {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+  }
+
+  .cta-buttons {
+    gap: 0.8rem;
+  }
+
+  .btn {
+    padding: 0.8rem 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+  }
+
+  .hero {
+    padding: 1.5rem 1rem;
+    min-height: auto;
+  }
+
+  section {
+    padding: 2.5rem 0;
+  }
+
+  section h2 {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+
+  /* Experience Ultra Mobile */
+  .experience-list {
+    padding: 0;
+  }
+
+  .experience-list::before {
+    left: 8px;
+  }
+
   .exp-item {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    margin-bottom: 2rem;
+    padding-left: 2rem;
+  }
+
+  .exp-item::before {
+    left: -38px !important;
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+  }
+
+  .exp-item:hover::before,
+  .exp-item:active::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  .exp-header {
+    padding: 1.2rem;
+    border-radius: 8px;
+  }
+
+  .exp-item h3 {
+    font-size: 1rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .exp-company {
+    font-size: 0.8rem;
+  }
+
+  .exp-date {
+    font-size: 0.75rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .exp-bullets li {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+    padding-left: 1.2rem;
+  }
+
+  .skill-card {
+    padding: 1rem;
+  }
+
+  .skill-card h3 {
+    font-size: 0.95rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .skill-card li {
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .skills-grid {
+    gap: 1rem;
+  }
+
+  .cert-grid,
+  .lang-grid {
+    gap: 1rem;
+  }
+
+  .cert-item {
+    padding: 1rem;
+  }
+
+  .cert-item h3 {
+    font-size: 0.95rem;
+  }
+
+  .cert-item p {
+    font-size: 0.8rem;
+  }
+
+  .badge {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .lang-card {
+    padding: 1rem;
+  }
+
+  .lang-card h3 {
+    font-size: 1rem;
+  }
+
+  .lang-card p {
+    font-size: 0.8rem;
+  }
+
+  .about-text p {
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .info-block {
+    padding: 1rem;
+  }
+
+  .info-block h3 {
+    font-size: 0.9rem;
+  }
+
+  .info-block p {
+    font-size: 0.85rem;
+  }
+
+  .contact-text {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-email {
+    font-size: 0.9rem;
+  }
+
+  .footer p {
+    font-size: 0.85rem;
+  }
+}
+
+/* Ultra Small (320px) */
+@media (max-width: 360px) {
+  .hero h1 {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  section h2 {
+    font-size: 1.2rem;
+  }
+
+  .nav-menu a {
+    font-size: 0.7rem;
   }
 }
