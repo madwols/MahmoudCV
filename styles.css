@@ -158,9 +158,7 @@ body {
   -webkit-text-fill-color: transparent;
   background-clip: text;
   line-height: 1.1;
-  white-space: nowrap;
 }
-
 
 .subtitle {
   font-size: 1.5rem;
@@ -675,7 +673,17 @@ body {
   font-size: 0.95rem;
 }
 
-/* Responsive */
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .hero h1 {
+    font-size: 3rem;
+  }
+
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2.5rem;
@@ -689,6 +697,14 @@ body {
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     padding: 1.5rem;
+  }
+
+  .metric-number {
+    font-size: 1.5rem;
+  }
+
+  .metric-label {
+    font-size: 0.75rem;
   }
 
   .cta-buttons {
@@ -733,5 +749,90 @@ body {
 
   .hero {
     padding: 2rem;
+    min-height: auto;
+  }
+
+  .hero-content {
+    max-width: 100%;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cert-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .lang-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+  }
+
+  .hero-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+    padding: 1rem;
+  }
+
+  .metric-number {
+    font-size: 1.2rem;
+  }
+
+  .metric-label {
+    font-size: 0.7rem;
+  }
+
+  .nav-menu {
+    gap: 0.5rem;
+  }
+
+  .nav-menu a {
+    font-size: 0.75rem;
+  }
+
+  .hero {
+    padding: 1rem;
+  }
+
+  section {
+    padding: 3rem 0;
+  }
+
+  section h2 {
+    font-size: 1.5rem;
+  }
+
+  .timeline-item {
+    margin-left: 40px;
+    margin-bottom: 2rem;
+  }
+
+  .timeline::before {
+    left: 10px;
+  }
+
+  .timeline-marker {
+    left: -30px;
+    width: 40px;
+    height: 40px;
+    font-size: 0.7rem;
+  }
+
+  .about-text p {
+    font-size: 0.95rem;
+  }
+
+  .timeline-content h3 {
+    font-size: 1.1rem;
   }
 }
