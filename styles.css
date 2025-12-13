@@ -307,8 +307,6 @@ section h2::after {
 .info-block {
   background: transparent;
   padding: 1rem;
-  border-radius: 0;
-  border: none;
   border-left: 3px solid var(--primary);
   transition: all 0.3s ease;
 }
@@ -329,36 +327,25 @@ section h2::after {
   font-size: 0.95rem;
 }
 
-/* Timeline */
-.timeline {
-  position: relative;
-  padding: 2rem 0;
+/* Experience Section */
+.experience-list {
+  display: grid;
+  gap: 2.5rem;
 }
 
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 30px;
-  top: 0;
-  bottom: 0;
-  width: 2px;
-  background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
-}
-
-.timeline-item {
-  margin-bottom: 3rem;
-  margin-left: 100px;
+.exp-item {
+  border-left: 3px solid var(--primary);
+  padding-left: 2rem;
   opacity: 0;
-  animation: slideIn 0.6s ease forwards;
-  position: relative;
+  animation: slideInExp 0.6s ease forwards;
 }
 
-.timeline-item:nth-child(1) { animation-delay: 0.1s; }
-.timeline-item:nth-child(2) { animation-delay: 0.2s; }
-.timeline-item:nth-child(3) { animation-delay: 0.3s; }
-.timeline-item:nth-child(4) { animation-delay: 0.4s; }
+.exp-item:nth-child(1) { animation-delay: 0.1s; }
+.exp-item:nth-child(2) { animation-delay: 0.2s; }
+.exp-item:nth-child(3) { animation-delay: 0.3s; }
+.exp-item:nth-child(4) { animation-delay: 0.4s; }
 
-@keyframes slideIn {
+@keyframes slideInExp {
   from {
     opacity: 0;
     transform: translateX(-20px);
@@ -369,39 +356,35 @@ section h2::after {
   }
 }
 
-.timeline-item::before {
-  content: '';
-  position: absolute;
-  left: -70px;
-  top: 0;
-  width: 60px;
-  height: 60px;
-  background: var(--primary);
-  border-radius: 50%;
-  border: 4px solid var(--bg-dark);
-  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+.exp-item:hover {
+  border-left-color: var(--secondary);
 }
 
-.timeline-content h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
+.exp-header h3 {
+  font-size: 1.4rem;
   color: var(--primary);
-  font-weight: 700;
+  margin-bottom: 0.5rem;
 }
 
-.company {
+.exp-company {
   color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.exp-date {
+  color: var(--accent);
   font-size: 0.9rem;
-  margin-bottom: 1rem;
-  font-style: italic;
+  margin: 0.3rem 0 1.5rem 0;
 }
 
-.timeline-content ul {
+.exp-bullets {
   list-style: none;
-  margin-top: 1rem;
+  padding: 0;
 }
 
-.timeline-content li {
+.exp-bullets li {
   color: var(--text-secondary);
   margin-bottom: 0.8rem;
   padding-left: 1.5rem;
@@ -409,7 +392,7 @@ section h2::after {
   line-height: 1.7;
 }
 
-.timeline-content li::before {
+.exp-bullets li::before {
   content: '▸';
   color: var(--secondary);
   position: absolute;
@@ -427,8 +410,6 @@ section h2::after {
 .skill-card {
   background: transparent;
   padding: 1.5rem 0;
-  border-radius: 0;
-  border: none;
   border-bottom: 1px solid var(--border);
   transition: all 0.3s ease;
 }
@@ -474,8 +455,6 @@ section h2::after {
   background: transparent;
   padding: 1rem 0;
   margin-bottom: 1.5rem;
-  border-radius: 0;
-  border: none;
   border-bottom: 1px solid var(--border);
 }
 
@@ -525,8 +504,6 @@ section h2::after {
 .lang-card {
   background: transparent;
   padding: 1rem;
-  border-radius: 0;
-  border: none;
   border-bottom: 2px solid var(--border);
   text-align: center;
   transition: all 0.3s ease;
@@ -630,20 +607,6 @@ section h2::after {
     grid-template-columns: 1fr;
   }
 
-  .timeline::before {
-    left: 15px;
-  }
-
-  .timeline-item {
-    margin-left: 50px;
-  }
-
-  .timeline-item::before {
-    left: -38px;
-    width: 50px;
-    height: 50px;
-  }
-
   .nav-menu {
     gap: 1rem;
   }
@@ -671,6 +634,10 @@ section h2::after {
 
   .lang-grid {
     grid-template-columns: 1fr;
+  }
+
+  .exp-item {
+    padding-left: 1.5rem;
   }
 }
 
@@ -717,26 +684,11 @@ section h2::after {
     font-size: 1.5rem;
   }
 
-  .timeline::before {
-    left: 10px;
-  }
-
-  .timeline-item {
-    margin-left: 40px;
-    margin-bottom: 2rem;
-  }
-
-  .timeline-item::before {
-    left: -30px;
-    width: 40px;
-    height: 40px;
-  }
-
   .about-text p {
     font-size: 0.95rem;
   }
 
-  .timeline-content h3 {
+  .exp-header h3 {
     font-size: 1.1rem;
   }
 }
