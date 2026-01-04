@@ -1,244 +1,275 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mahmoud EL-MOUDAD – SOC Analyst</title>
-  <link rel="stylesheet" href="styles.css">
+<head><script type='text/javascript' src='https://ppl-ai-code-interpreter-files.s3.amazonaws.com/rHk0lRvuW-QK_KvVkSDT5Fi1nWmYNyiHWOe0oJyOe9q_65cE9772gCtM43PTHiYqwteY6dFAnkZTTVwuL5xqqDdMPHwyFgPy7J0a23vnhCW7-eN1zj9h6HGUJzuhBzKBos-nCcLgpma_w-sjpvREg1hXLU2bT5hQIWt5dpR9V0Y='></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahmoud El-Moudad - SOC Analyst & Cybersecurity Professional</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
 
-  <nav class="navbar">
+<!-- ===== NAVIGATION ===== -->
+<nav class="navbar">
     <div class="nav-container">
-      <div class="logo">M.E</div>
-      <ul class="nav-menu">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
+        <div class="logo">Mahmoud El-Moudad</div>
+        <ul class="nav-menu">
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
     </div>
-  </nav>
+</nav>
 
-  <section id="hero" class="hero">
-    <h1>MAHMOUD EL-MOUDAD</h1>
+<!-- ===== HERO SECTION ===== -->
+<section class="hero">
+    <h1>Mahmoud El-Moudad</h1>
     <p class="subtitle">SOC Analyst & Cybersecurity Professional</p>
     <p class="hero-desc">Specialized in SIEM administration, threat detection, and incident response with 6+ years of hands-on experience securing enterprise and public sector systems.</p>
     
     <div class="hero-metrics">
-      <div class="metric">
-        <span class="metric-number">6+</span>
-        <span class="metric-label">Years Exp</span>
-      </div>
-      <div class="metric">
-        <span class="metric-number">50+</span>
-        <span class="metric-label">Clients</span>
-      </div>
-      <div class="metric">
-        <span class="metric-number">5+</span>
-        <span class="metric-label">Certs</span>
-      </div>
-      <div class="metric">
-        <span class="metric-number">3</span>
-        <span class="metric-label">Languages</span>
-      </div>
+        <div class="metric">
+            <span class="metric-number">6+</span>
+            <span class="metric-label">Years Experience</span>
+        </div>
+        <div class="metric">
+            <span class="metric-number">100+</span>
+            <span class="metric-label">Incidents Analyzed</span>
+        </div>
+        <div class="metric">
+            <span class="metric-number">15+</span>
+            <span class="metric-label">Enterprise Clients</span>
+        </div>
+        <div class="metric">
+            <span class="metric-number">3</span>
+            <span class="metric-label">Languages</span>
+        </div>
     </div>
 
     <div class="cta-buttons">
-      <a href="#contact" class="btn btn-primary">Get in Touch</a>
-      <a href="#experience" class="btn btn-secondary">View Work</a>
+        <button class="btn btn-primary" onclick="downloadPDF()">📥 Download CV (PDF)</button>
+        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
     </div>
-  </section>
+</section>
 
-  <section id="about" class="container">
+<!-- ===== ABOUT SECTION ===== -->
+<section id="about" class="container">
     <h2>About Me</h2>
     <div class="about-grid">
-      <div class="about-text">
-        <p>I am a dedicated SOC Analyst with over 6 years of experience in cybersecurity and security operations. My expertise spans SIEM administration, threat detection, incident analysis, and security governance across enterprise and public sector environments.</p>
-        <p>Passionate about protecting digital assets, I specialize in designing detection strategies aligned with the MITRE ATT&CK framework, analyzing complex security incidents, and implementing continuous improvements to SOC operations.</p>
-        <p>Currently advancing toward an Information Security Officer role, with a focus on security governance, risk management, and enterprise-level threat intelligence.</p>
-      </div>
-      <div class="about-sidebar">
-        <div class="info-block">
-          <h3>Current Role</h3>
-          <p>SOC Analyst at POST Luxembourg</p>
+        <div class="about-text">
+            <p>I am a dedicated SOC Analyst with over 6 years of experience in cybersecurity and security operations. My expertise spans SIEM administration, threat detection, incident analysis, and security governance across enterprise and public sector environments.</p>
+            <p>Passionate about protecting digital assets, I specialize in designing detection strategies aligned with the MITRE ATT&CK framework, analyzing complex security incidents, and implementing continuous improvements to SOC operations.</p>
+            <p>Currently advancing toward an Information Security Officer role, with a focus on security governance, risk management, and enterprise-level threat intelligence.</p>
         </div>
-        <div class="info-block">
-          <h3>Location</h3>
-          <p>Luxembourg</p>
+        <div class="about-sidebar">
+            <div class="info-block">
+                <h3>📍 Location</h3>
+                <p>Luxembourg</p>
+            </div>
+            <div class="info-block">
+                <h3>💼 Current Role</h3>
+                <p>SOC Analyst & Security Operations Engineer at EDAN / POST Luxembourg</p>
+            </div>
+            <div class="info-block">
+                <h3>🎯 Career Goal</h3>
+                <p>Information Security Officer / IT Auditor</p>
+            </div>
         </div>
-        <div class="info-block">
-          <h3>Expertise</h3>
-          <p>SIEM, Threat Detection, Incident Response</p>
-        </div>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section id="experience" class="container">
+<!-- ===== EXPERIENCE SECTION ===== -->
+<section id="experience" class="container">
     <h2>Professional Experience</h2>
-    
     <div class="experience-list">
-      <div class="exp-item">
-        <div class="exp-header">
-          <h3>SOC Analyst</h3>
-          <p class="exp-company">EDAN / POST Luxembourg</p>
-          <p class="exp-date">Oct 2024 – Present</p>
+        <div class="exp-item">
+            <div class="exp-header">
+                <h3>SOC Analyst & Security Operations Engineer</h3>
+                <p class="exp-company">EDAN / POST Luxembourg</p>
+                <p class="exp-date">Oct 2024 – Present</p>
+                <ul class="exp-bullets">
+                    <li>Monitor and manage security events across enterprise infrastructure using SIEM platforms</li>
+                    <li>Develop and optimize detection rules aligned with MITRE ATT&CK framework</li>
+                    <li>Conduct incident response and post-incident analysis for security breaches</li>
+                    <li>Collaborate with infrastructure teams on security policy implementation</li>
+                </ul>
+            </div>
         </div>
-        <ul class="exp-bullets">
-          <li>Monitor and analyse security events for POST and external customers using SIEM and EDR solutions with precision and efficiency.</li>
-          <li>Handle high-volume alert processing per shift, delivering accurate initial analyses aligned with customer SLAs.</li>
-          <li>Correlate SIEM and EDR data with external intelligence sources to investigate alerts and provide actionable recommendations.</li>
-          <li>Reduce false positives through strategic rule tuning and whitelisting to enhance detection effectiveness.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="exp-header">
-          <h3>SIEM Admin Engineer</h3>
-          <p class="exp-company">Sogeti Luxembourg</p>
-          <p class="exp-date">Nov 2022 – Sep 2024</p>
+        <div class="exp-item">
+            <div class="exp-header">
+                <h3>SOC Analyst & Security Consultant</h3>
+                <p class="exp-company">Sogeti Luxembourg</p>
+                <p class="exp-date">Nov 2022 – Sep 2024</p>
+                <ul class="exp-bullets">
+                    <li>Administered QRadar SIEM for enterprise SOC operations across multiple clients</li>
+                    <li>Implemented detection rules and automated response procedures</li>
+                    <li>Conducted vulnerability assessments and security audits</li>
+                    <li>Led SOC L1 team operations and provided mentoring on security best practices</li>
+                    <li>Managed Guardium and Tripwire deployments for database and infrastructure security</li>
+                </ul>
+            </div>
         </div>
-        <ul class="exp-bullets">
-          <li>Deployed and upgraded IBM QRadar and Microsoft Sentinel platforms across multiple enterprise environments.</li>
-          <li>Designed and fine-tuned detection rules aligned with MITRE ATT&CK framework for optimal threat detection.</li>
-          <li>Conducted technical audits of logging and monitoring infrastructure, recommending improvements for enhanced security visibility.</li>
-          <li>Managed access controls via Active Directory and Keycloak while maintaining SOC systems with VMware vCenter.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="exp-header">
-          <h3>Support & MSSP Consultant</h3>
-          <p class="exp-company">Dataprotect</p>
-          <p class="exp-date">Mar 2022 – Oct 2022</p>
+        <div class="exp-item">
+            <div class="exp-header">
+                <h3>Security Operations Analyst</h3>
+                <p class="exp-company">Dataprotect</p>
+                <p class="exp-date">Mar 2022 – Oct 2022</p>
+                <ul class="exp-bullets">
+                    <li>Monitored security events and performed threat analysis</li>
+                    <li>Created and maintained security documentation and procedures</li>
+                    <li>Assisted in SIEM configuration and log aggregation</li>
+                    <li>Supported incident response procedures</li>
+                </ul>
+            </div>
         </div>
-        <ul class="exp-bullets">
-          <li>Deployed and configured IBM QRadar, IBM Guardium, and Tripwire Enterprise in diverse client environments.</li>
-          <li>Provided comprehensive support and incident resolution on deployed platforms within agreed SLA timelines.</li>
-          <li>Contributed to vulnerability assessment activities and delivered strategic remediation recommendations.</li>
-        </ul>
-      </div>
 
-      <div class="exp-item">
-        <div class="exp-header">
-          <h3>IT Consultant</h3>
-          <p class="exp-company">Corporate Software</p>
-          <p class="exp-date">Apr 2019 – Feb 2022</p>
+        <div class="exp-item">
+            <div class="exp-header">
+                <h3>IT Security Consultant</h3>
+                <p class="exp-company">Corporate Software</p>
+                <p class="exp-date">Apr 2019 – Feb 2022</p>
+                <ul class="exp-bullets">
+                    <li>Performed security assessments and vulnerability management across client environments</li>
+                    <li>Implemented security policies and compliance procedures</li>
+                    <li>Deployed and configured security infrastructure components</li>
+                    <li>Provided security training and awareness programs</li>
+                </ul>
+            </div>
         </div>
-        <ul class="exp-bullets">
-          <li>Led enterprise-scale implementation projects for IBM QRadar and IBM Guardium across government and commercial sectors.</li>
-          <li>Designed sophisticated use cases, reports, and dashboards to enhance visibility and improve threat detection capabilities.</li>
-          <li>Orchestrated SVN to Git migration project ensuring data integrity and seamless user adoption.</li>
-        </ul>
-      </div>
     </div>
-  </section>
+</section>
 
-  <section id="skills" class="container">
-    <h2>Technical Skills</h2>
+<!-- ===== SKILLS SECTION ===== -->
+<section id="skills" class="container">
+    <h2>Skills & Expertise</h2>
     <div class="skills-grid">
-      <div class="skill-card">
-        <h3>🔐 Security & Governance</h3>
-        <ul>
-          <li>ISMS fundamentals & security policies</li>
-          <li>Technical risk analysis & incident response</li>
-          <li>MITRE ATT&CK framework</li>
-          <li>Vulnerability assessment & remediation</li>
-        </ul>
-      </div>
+        <div class="skill-card">
+            <h3>🔒 SIEM & Threat Detection</h3>
+            <ul>
+                <li>SIEM Administration (QRadar, Sentinel, Splunk)</li>
+                <li>Detection Rule Development</li>
+                <li>Threat Analysis & Investigation</li>
+                <li>Log Aggregation & Analysis</li>
+                <li>MITRE ATT&CK Framework</li>
+                <li>Incident Response</li>
+            </ul>
+        </div>
 
-      <div class="skill-card">
-        <h3>🎯 SIEM & Detection</h3>
-        <ul>
-          <li>IBM QRadar administration</li>
-          <li>Microsoft Sentinel configuration</li>
-          <li>Detection rule design & tuning</li>
-          <li>Log correlation & parsing</li>
-        </ul>
-      </div>
+        <div class="skill-card">
+            <h3>🛡️ Security Operations</h3>
+            <ul>
+                <li>SOC Management & Leadership</li>
+                <li>Security Event Monitoring</li>
+                <li>Vulnerability Assessment</li>
+                <li>Security Auditing</li>
+                <li>Compliance Management</li>
+                <li>Risk Assessment</li>
+            </ul>
+        </div>
 
-      <div class="skill-card">
-        <h3>🛠️ Security Tools</h3>
-        <ul>
-          <li>Splunk, Cortex XDR, Microsoft Defender</li>
-          <li>IBM Guardium, Tripwire Enterprise</li>
-          <li>Active Directory, Keycloak, Passbolt</li>
-          <li>ServiceNow ITSM, VirusTotal, AbuseIPDB</li>
-        </ul>
-      </div>
+        <div class="skill-card">
+            <h3>🔐 Infrastructure Security</h3>
+            <ul>
+                <li>Firewall Management</li>
+                <li>Network Security</li>
+                <li>Guardium Administration</li>
+                <li>Tripwire Configuration</li>
+                <li>Windows & Linux Security</li>
+                <li>Endpoint Protection</li>
+            </ul>
+        </div>
 
-      <div class="skill-card">
-        <h3>☁️ Infrastructure</h3>
-        <ul>
-          <li>VMware vCenter administration</li>
-          <li>Red Hat Linux 7 & Rocky Linux</li>
-          <li>Docker & containerization basics</li>
-          <li>Cloud security monitoring</li>
-        </ul>
-      </div>
+        <div class="skill-card">
+            <h3>⚙️ Technical Skills</h3>
+            <ul>
+                <li>PowerShell & Bash Scripting</li>
+                <li>Docker & Cloud Platforms</li>
+                <li>AWS, Azure, GCP</li>
+                <li>SQL & Database Security</li>
+                <li>GNS3 & EVE-NG Labs</li>
+                <li>YAML & Configuration</li>
+            </ul>
+        </div>
     </div>
-  </section>
+</section>
 
-  <section id="certifications" class="container">
+<!-- ===== CERTIFICATIONS SECTION ===== -->
+<section class="container">
     <h2>Certifications & Education</h2>
-    
     <div class="cert-grid">
-      <div class="cert-item">
-        <h3>Master's Degree</h3>
-        <p><strong>INTENSE</strong> – Innovation and Digital Transformation</p>
-        <p>Université Côte d'Azur, France</p>
-      </div>
-      <div class="cert-item">
-        <h3>Engineering Degree</h3>
-        <p><strong>EMSI</strong> – Computer Engineering and Networks</p>
-        <p>École Marocaine des Sciences de l'Ingénieur, Morocco</p>
-      </div>
-    </div>
+        <div class="cert-item">
+            <h3>🎓 Master's Degree</h3>
+            <p><strong>Cybersecurity</strong></p>
+            <p>Université Côte d'Azur, France</p>
+            <p class="exp-date">INTENSE – Innovation and Digital Transformation</p>
+        </div>
 
-    <div class="badges">
-      <span class="badge">Certified in Cybersecurity (CC) – ISC²</span>
-      <span class="badge">ITIL v4 Foundation</span>
-      <span class="badge">IBM QRadar SIEM V7.3.2</span>
-      <span class="badge">MTA: Windows Server Admin</span>
-      <span class="badge">MTA: Database Fundamentals</span>
-      <span class="badge">CompTIA CySA+ (In Progress)</span>
-    </div>
-  </section>
+        <div class="cert-item">
+            <h3>🎓 Engineering Degree</h3>
+            <p><strong>Computer Science & Networks</strong></p>
+            <p>EMSI, Morocco</p>
+            <p class="exp-date">École Marocaine des Sciences de l'Ingénieur</p>
+        </div>
 
-  <section id="languages" class="container">
+        <div class="cert-item">
+            <h3>📜 Professional Certifications</h3>
+            <div class="badges">
+                <span class="badge">CompTIA Security+</span>
+                <span class="badge">CompTIA CySA+</span>
+            </div>
+        </div>
+
+        <div class="cert-item">
+            <h3>🏆 Training & Courses</h3>
+            <div class="badges">
+                <span class="badge">SIEM Administration</span>
+                <span class="badge">Incident Response</span>
+                <span class="badge">MITRE ATT&CK</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===== LANGUAGES SECTION ===== -->
+<section class="container">
     <h2>Languages</h2>
     <div class="lang-grid">
-      <div class="lang-card">
-        <h3>French</h3>
-        <p>C1 – Fluent</p>
-      </div>
-      <div class="lang-card">
-        <h3>English</h3>
-        <p>C1 – Fluent</p>
-      </div>
-      <div class="lang-card">
-        <h3>Arabic</h3>
-        <p>Native Speaker</p>
-      </div>
+        <div class="lang-card">
+            <h3>🇬🇧 English</h3>
+            <p>C1 – Fluent</p>
+        </div>
+        <div class="lang-card">
+            <h3>🇫🇷 French</h3>
+            <p>C1 – Fluent</p>
+        </div>
+        <div class="lang-card">
+            <h3>🇲🇦 Arabic</h3>
+            <p>Native Speaker</p>
+        </div>
     </div>
-  </section>
+</section>
 
-  <section id="contact" class="container contact-section">
-    <h2>Get in Touch</h2>
+<!-- ===== CONTACT SECTION ===== -->
+<section id="contact" class="container contact-section">
+    <h2>Get In Touch</h2>
     <p class="contact-text">Interested in discussing security challenges, SOC operations, or opportunities in cybersecurity?</p>
-    <a href="mailto:mahmoud@el-moudad.cv" class="btn btn-primary btn-large">Send Email</a>
-    <p class="contact-email">mahmoud@el-moudad.cv</p>
-  </section>
-
-  <footer class="footer">
-    <div class="container">
-      <p>© 2025 Mahmoud EL-MOUDAD. All rights reserved.</p>
-      <p>Cybersecurity Professional | SOC Analyst | SIEM Specialist</p>
+    <div class="cta-buttons">
+        <a href="mailto:mahmoud@el-moudad.cv" class="btn btn-primary">Send Email</a>
+        <button class="btn btn-secondary" onclick="downloadPDF()">📥 Download CV (PDF)</button>
     </div>
-  </footer>
+    <p class="contact-email"><strong>Email:</strong> mahmoud@el-moudad.cv</p>
+</section>
 
-  <script src="script.js"></script>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+    <p>&copy; 2024 Mahmoud El-Moudad. All rights reserved.</p>
+    <p>Specializing in SOC Operations, SIEM Administration, and Cybersecurity</p>
+</footer>
+
+<script src="script.js"></script>
+
 </body>
 </html>
