@@ -1,265 +1,691 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><script type='text/javascript' src='https://ppl-ai-code-interpreter-files.s3.amazonaws.com/UZaczZ-GwsyUesx7Tk9Na9LM2aveNroxf84fJdvLlGBv45y0n9WHlYfjbHwdSadFs6Wzqw7wrbQZccazzBV5soJTGyMEzMGS0YCyz6OfOuOkS8nf7YQgS8LORmxBA0msPTefdEZRMKSxDgeoWKRZdOS_lYyTolJF38MW09rZ2wM='></script>
+<head><script type='text/javascript' src='https://ppl-ai-code-interpreter-files.s3.amazonaws.com/niyrV1NjWJk5F9qyprHjLjIB-dR9DwUE08i1dixs2fM3WfP09V21Yfw8kqDLjwcJ1PuCfLleYWyyUYK8d-r9DTYpuEx_srLp0DJFt-Nkym3XIbNZBvih2Mi5h5zEuCthNnlg2lEgtglAUg7mqgRcG75Ijbq9oQICVUgEj-wnQAA='></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mahmoud El-Moudad - SOC Analyst & Cybersecurity Professional</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Mahmoud EL-MOUDAD - SecOps Engineer</title>
+    <style>
+        :root {
+            --primary: #0f172a;
+            --secondary: #1e293b;
+            --accent: #3b82f6;
+            --accent-light: #60a5fa;
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --bg-main: #0f172a;
+            --bg-card: #1e293b;
+            --bg-hover: #334155;
+            --border: #334155;
+            --success: #10b981;
+            --divider: #475569;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--text-primary);
+            background-color: var(--bg-main);
+            line-height: 1.6;
+        }
+
+        /* Header / Hero Section */
+        .header {
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+            color: var(--text-primary);
+            padding: 4rem 1.5rem;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 0.75rem;
+            font-weight: 700;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header .title {
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: var(--accent-light);
+            margin-bottom: 2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 0.9rem;
+            margin-top: 1.5rem;
+        }
+
+        .contact-info span {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        /* Container */
+        .container {
+            max-width: 920px;
+            margin: 0 auto;
+            padding: 2.5rem 1.5rem;
+        }
+
+        /* Section Styling */
+        .section {
+            margin-bottom: 2.5rem;
+            background: var(--bg-card);
+            padding: 2.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        .section h2 {
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .section h2:before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(180deg, var(--accent) 0%, var(--accent-light) 100%);
+            border-radius: 2px;
+        }
+
+        /* Experience & Education Items */
+        .item {
+            margin-bottom: 2.25rem;
+            padding-bottom: 2.25rem;
+            border-bottom: 1px solid var(--divider);
+        }
+
+        .item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 1.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .item-subtitle {
+            font-size: 0.95rem;
+            color: var(--accent-light);
+            font-weight: 500;
+            margin-top: 0.25rem;
+        }
+
+        .item-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            white-space: nowrap;
+            background: rgba(59, 130, 246, 0.1);
+            padding: 0.375rem 0.75rem;
+            border-radius: 6px;
+        }
+
+        .item-description {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .item-description ul {
+            list-style: none;
+            margin-top: 0.75rem;
+        }
+
+        .item-description li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.6rem;
+            position: relative;
+        }
+
+        .item-description li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 1.25rem;
+        }
+
+        .skill-item {
+            background: rgba(59, 130, 246, 0.08);
+            padding: 1.25rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-item:hover {
+            background: rgba(59, 130, 246, 0.15);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .skill-item strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 0.95rem;
+            color: var(--accent-light);
+        }
+
+        .skill-item span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Certifications Section */
+        .cert-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .cert-item {
+            background: rgba(16, 185, 129, 0.08);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-left: 3px solid var(--success);
+            transition: all 0.3s ease;
+        }
+
+        .cert-item:hover {
+            background: rgba(16, 185, 129, 0.12);
+        }
+
+        .cert-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .cert-issuer {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        /* Languages */
+        .language-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(59, 130, 246, 0.05);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .language-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .language-item span:first-child {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        .lang-level {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        /* Summary/About */
+        .summary {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.9;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            margin-top: 2rem;
+        }
+
+        .footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Download Button */
+        .download-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%);
+            color: var(--primary);
+            padding: 0.85rem 1.75rem;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 3rem 1rem;
+            }
+
+            .header h1 {
+                font-size: 2.25rem;
+            }
+
+            .header .title {
+                font-size: 1.1rem;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+                justify-content: center;
+            }
+
+            .container {
+                padding: 1.5rem 1rem;
+            }
+
+            .section {
+                padding: 1.75rem;
+                margin-bottom: 2rem;
+            }
+
+            .item-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .item-date {
+                align-self: flex-start;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.75rem;
+            }
+
+            .header .title {
+                font-size: 1rem;
+            }
+
+            .contact-info {
+                gap: 0.75rem;
+                font-size: 0.8rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section h2 {
+                font-size: 1.3rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .item {
+                margin-bottom: 1.75rem;
+                padding-bottom: 1.75rem;
+            }
+
+            .download-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: var(--text-primary);
+                color: var(--primary);
+            }
+
+            .header {
+                page-break-after: avoid;
+                background: var(--primary);
+            }
+
+            .header h1 {
+                color: var(--accent);
+            }
+
+            .section {
+                page-break-inside: avoid;
+                box-shadow: none;
+                border: 1px solid #ddd;
+                background: var(--text-primary);
+                color: var(--primary);
+            }
+
+            .section h2 {
+                color: var(--primary);
+            }
+
+            .download-btn {
+                display: none;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<!-- ===== NAVIGATION ===== -->
-<nav class="navbar">
-    <div class="nav-container">
-        <div class="logo">Mahmoud El-Moudad</div>
-        <ul class="nav-menu">
-            <li><a href="#about">About</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </div>
-</nav>
-
-<!-- ===== HERO SECTION ===== -->
-<section class="hero">
-    <h1>Mahmoud El-Moudad</h1>
-    <p class="subtitle">SOC Analyst & Cybersecurity Professional</p>
-    <p class="hero-desc">Specialized in SIEM administration, threat detection, and incident response with 6+ years of hands-on experience securing enterprise and public sector systems.</p>
-    
-    <div class="hero-metrics">
-        <div class="metric">
-            <span class="metric-number">6+</span>
-            <span class="metric-label">Years Experience</span>
+    <!-- Header -->
+    <header class="header">
+        <h1>Mahmoud EL-MOUDAD</h1>
+        <div class="title">SecOps Engineer | Security Operations Analyst</div>
+        <div class="contact-info">
+            <span>📧 mahmoudel-moudad.cv</span>
+            <span>📍 Luxembourg</span>
         </div>
-        <div class="metric">
-            <span class="metric-number">15+</span>
-            <span class="metric-label">Enterprise Clients</span>
-        </div>
-        <div class="metric">
-            <span class="metric-number">3</span>
-            <span class="metric-label">Languages</span>
-        </div>
-    </div>
+    </header>
 
-    <div class="cta-buttons">
-        <button class="btn btn-primary" onclick="downloadPDF()">📥 Download CV (PDF)</button>
-        <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-    </div>
-</section>
-
-<!-- ===== ABOUT SECTION ===== -->
-<section id="about" class="container">
-    <h2>About Me</h2>
-    <div class="about-grid">
-        <div class="about-text">
-            <p>I am a dedicated SOC Analyst with over 6 years of experience in cybersecurity and security operations. My expertise spans SIEM administration, threat detection, incident analysis, and security governance across enterprise and public sector environments.</p>
-            <p>Passionate about protecting digital assets, I specialize in designing detection strategies aligned with the MITRE ATT&CK framework, analyzing complex security incidents, and implementing continuous improvements to SOC operations.</p>
-            <p>Currently advancing toward an Information Security Officer role, with a focus on security governance, risk management, and enterprise-level threat intelligence.</p>
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Summary Section -->
+        <div class="section">
+            <h2>Professional Summary</h2>
+            <p class="summary">
+                Security Operations Analyst with 6 years of expertise in SIEM administration, threat detection, and incident response. Specialized in deploying and managing IBM QRadar, Microsoft Sentinel, and Splunk platforms across enterprise environments. Proven track record in designing detection rules aligned with MITRE ATT&CK framework, reducing false positives, and leading SOC teams. Strong background in cloud infrastructure (Azure, Linux), IAM solutions, and client-facing support in MSSP environments. Bilingual professional (French C2, English C1) based in Luxembourg with Master's degree in Digital Transformation and Engineering background in Computer Networks.
+            </p>
         </div>
-        <div class="about-sidebar">
-            <div class="info-block">
-                <h3>📍 Location</h3>
-                <p>Luxembourg</p>
+
+        <!-- Experience Section -->
+        <div class="section">
+            <h2>Work Experience</h2>
+
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">SOC Analyst</div>
+                        <div class="item-subtitle">EDAN POST Luxembourg</div>
+                    </div>
+                    <div class="item-date">Oct 2024 – Present</div>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>Monitor and analyze security events for multiple customers using SIEM and EDR solutions</li>
+                        <li>Investigate alerts with threat-intelligence tools and communicate recommendations to clients</li>
+                        <li>Tune detection rules and procedures to reduce false positives and improve SOC efficiency</li>
+                        <li>Conduct incident response and post-incident analysis</li>
+                    </ul>
+                </div>
             </div>
-            <div class="info-block">
-                <h3>💼 Current Role</h3>
-                <p>SOC Analyst at La Poste Luxembourg</p>
-            </div>
-        </div>
-    </div>
-</section>
 
-<!-- ===== EXPERIENCE SECTION ===== -->
-<section id="experience" class="container">
-    <h2>Professional Experience</h2>
-    <div class="experience-list">
-        <div class="exp-item">
-            <div class="exp-header">
-                <h3>SOC Analyst & Security Operations Engineer</h3>
-                <p class="exp-company">EDAN / POST Luxembourg</p>
-                <p class="exp-date">Oct 2024 – Present</p>
-                <ul class="exp-bullets">
-                    <li>Monitor and manage security events across enterprise infrastructure using SIEM platforms</li>
-                    <li>Develop and optimize detection rules aligned with MITRE ATT&CK framework</li>
-                    <li>Conduct incident response and post-incident analysis for security breaches</li>
-                    <li>Collaborate with infrastructure teams on security policy implementation</li>
-                </ul>
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Platform SIEM Engineer</div>
+                        <div class="item-subtitle">Sogeti, Luxembourg</div>
+                    </div>
+                    <div class="item-date">Nov 2022 – Sep 2024</div>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>Administered and deployed IBM QRadar and Microsoft Sentinel for multiple client environments</li>
+                        <li>Designed and fine-tuned detection rules, performed technical audits, and proposed improvements</li>
+                        <li>Managed user identities and access control through Keycloak and Active Directory</li>
+                        <li>Proactively monitored SIEM infrastructure on RedHat Linux 7 and VMware vCenter</li>
+                        <li>Integrated diverse data sources into SIEM platforms for comprehensive monitoring</li>
+                        <li>Managed Microsoft Azure cloud services for SOC operations</li>
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <div class="exp-item">
-            <div class="exp-header">
-                <h3>SOC Analyst & Security Consultant</h3>
-                <p class="exp-company">Sogeti Luxembourg</p>
-                <p class="exp-date">Nov 2022 – Sep 2024</p>
-                <ul class="exp-bullets">
-                    <li>Administered QRadar SIEM for enterprise SOC operations across multiple clients</li>
-                    <li>Implemented detection rules and automated response procedures</li>
-                    <li>Conducted vulnerability assessments and security audits</li>
-                    <li>Led SOC L1 team operations and provided mentoring on security best practices</li>
-                    <li>Managed Guardium and Tripwire deployments for database and infrastructure security</li>
-                </ul>
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Support MSSP Consultant</div>
+                        <div class="item-subtitle">Dataprotect, Casablanca</div>
+                    </div>
+                    <div class="item-date">Mar 2022 – Oct 2022</div>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>Orchestrated integration and advanced support for QRadar SIEM, Guardium, and Tripwire solutions</li>
+                        <li>Managed service requests and incident resolution within strict deadlines</li>
+                        <li>Ensured continuous monitoring of client platforms and proactive service continuity</li>
+                    </ul>
+                </div>
             </div>
-        </div>
 
-        <div class="exp-item">
-            <div class="exp-header">
-                <h3>Security Operations Analyst</h3>
-                <p class="exp-company">Dataprotect</p>
-                <p class="exp-date">Mar 2022 – Oct 2022</p>
-                <ul class="exp-bullets">
-                    <li>Monitored security events and performed threat analysis</li>
-                    <li>Created and maintained security documentation and procedures</li>
-                    <li>Assisted in SIEM configuration and log aggregation</li>
-                    <li>Supported incident response procedures</li>
-                </ul>
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">IT Consultant</div>
+                        <div class="item-subtitle">Corporate Software Expertise Data, Casablanca</div>
+                    </div>
+                    <div class="item-date">Apr 2019 – Feb 2022</div>
+                </div>
+                <div class="item-description">
+                    <ul>
+                        <li>Led major projects implementing QRadar SIEM and Guardium Data Protection solutions</li>
+                        <li>Deployed solutions for high-profile enterprise clients in telecom, financial, and logistics sectors</li>
+                        <li>Implemented sensitive data masking and protection solutions</li>
+                        <li>Led infrastructure migration projects and version control system upgrades</li>
+                        <li>Handled requirements gathering, bid responses, technical documentation, and team training</li>
+                    </ul>
+                </div>
             </div>
         </div>
 
-        <div class="exp-item">
-            <div class="exp-header">
-                <h3>IT Security Consultant</h3>
-                <p class="exp-company">Corporate Software</p>
-                <p class="exp-date">Apr 2019 – Feb 2022</p>
-                <ul class="exp-bullets">
-                    <li>Performed security assessments and vulnerability management across client environments</li>
-                    <li>Implemented security policies and compliance procedures</li>
-                    <li>Deployed and configured security infrastructure components</li>
-                    <li>Provided security training and awareness programs</li>
-                </ul>
+        <!-- Education Section -->
+        <div class="section">
+            <h2>Education</h2>
+
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Master's Degree - INTENSE</div>
+                        <div class="item-subtitle">Innovation and Digital Transformation of the Enterprise</div>
+                        <div class="item-subtitle">Université Côte d'Azur, Nice, France</div>
+                    </div>
+                    <div class="item-date">2018 – 2019</div>
+                </div>
             </div>
-        </div>
-    </div>
-</section>
 
-<!-- ===== SKILLS SECTION ===== -->
-<section id="skills" class="container">
-    <h2>Skills & Expertise</h2>
-    <div class="skills-grid">
-        <div class="skill-card">
-            <h3>🔒 SIEM & Threat Detection</h3>
-            <ul>
-                <li>SIEM Administration (QRadar, Sentinel, Splunk)</li>
-                <li>Detection Rule Development</li>
-                <li>Threat Analysis & Investigation</li>
-                <li>Log Aggregation & Analysis</li>
-                <li>MITRE ATT&CK Framework</li>
-                <li>Incident Response</li>
-            </ul>
-        </div>
-
-        <div class="skill-card">
-            <h3>🛡️ Security Operations</h3>
-            <ul>
-                <li>SOC Management & Leadership</li>
-                <li>Security Event Monitoring</li>
-                <li>Vulnerability Assessment</li>
-                <li>Security Auditing</li>
-                <li>Compliance Management</li>
-                <li>Risk Assessment</li>
-            </ul>
-        </div>
-
-        <div class="skill-card">
-            <h3>🔐 Infrastructure Security</h3>
-            <ul>
-                <li>Firewall Management</li>
-                <li>Network Security</li>
-                <li>Guardium Administration</li>
-                <li>Tripwire Configuration</li>
-                <li>Windows & Linux Security</li>
-                <li>Endpoint Protection</li>
-            </ul>
-        </div>
-
-        <div class="skill-card">
-            <h3>⚙️ Technical Skills</h3>
-            <ul>
-                <li>PowerShell & Bash Scripting</li>
-                <li>Docker & Cloud Platforms</li>
-                <li>AWS, Azure, GCP</li>
-                <li>SQL & Database Security</li>
-                <li>GNS3 & EVE-NG Labs</li>
-                <li>YAML & Configuration</li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<!-- ===== CERTIFICATIONS SECTION ===== -->
-<section class="container">
-    <h2>Certifications & Education</h2>
-    <div class="cert-grid">
-        <div class="cert-item">
-            <h3>🎓 Master's Degree</h3>
-            <p><strong>Cybersecurity</strong></p>
-            <p>Université Côte d'Azur, France</p>
-            <p class="exp-date">INTENSE – Innovation and Digital Transformation</p>
-        </div>
-
-        <div class="cert-item">
-            <h3>🎓 Engineering Degree</h3>
-            <p><strong>Computer Science & Networks</strong></p>
-            <p>EMSI, Morocco</p>
-            <p class="exp-date">École Marocaine des Sciences de l'Ingénieur</p>
-        </div>
-
-        <div class="cert-item">
-            <h3>📜 Professional Certifications</h3>
-            <div class="badges">
-                <span class="badge">CompTIA CySA+ (In Progress)</span>
+            <div class="item">
+                <div class="item-header">
+                    <div>
+                        <div class="item-title">Engineering Degree</div>
+                        <div class="item-subtitle">Computer Engineering and Networks</div>
+                        <div class="item-subtitle">Ecole Marocaine des Sciences de l'Ingénieur, Casablanca</div>
+                    </div>
+                    <div class="item-date">2014 – 2019</div>
+                </div>
             </div>
         </div>
 
-        <div class="cert-item">
-            <h3>🏆 Training & Courses</h3>
-            <div class="badges">
-                <span class="badge">SIEM Administration</span>
-                <span class="badge">Incident Response</span>
-                <span class="badge">MITRE ATT&CK</span>
+        <!-- Skills Section -->
+        <div class="section">
+            <h2>Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <strong>SIEM</strong>
+                    <span>QRadar, Sentinel, Splunk</span>
+                </div>
+                <div class="skill-item">
+                    <strong>Security Tools</strong>
+                    <span>Guardium, Tripwire, EDR</span>
+                </div>
+                <div class="skill-item">
+                    <strong>Scripting</strong>
+                    <span>Python, Bash, PowerShell</span>
+                </div>
+                <div class="skill-item">
+                    <strong>Cloud/Infra</strong>
+                    <span>Azure, Linux, VMware</span>
+                </div>
+                <div class="skill-item">
+                    <strong>IAM</strong>
+                    <span>Keycloak, Active Directory</span>
+                </div>
+                <div class="skill-item">
+                    <strong>Detection</strong>
+                    <span>MITRE ATT&CK, Rule Tuning</span>
+                </div>
+                <div class="skill-item">
+                    <strong>Threat Intel</strong>
+                    <span>Analysis, Incident Response</span>
+                </div>
+                <div class="skill-item">
+                    <strong>Other</strong>
+                    <span>O365, GIT, Informatica</span>
+                </div>
             </div>
         </div>
-    </div>
-</section>
 
-<!-- ===== LANGUAGES SECTION ===== -->
-<section class="container">
-    <h2>Languages</h2>
-    <div class="lang-grid">
-        <div class="lang-card">
-            <h3>🇬🇧 English</h3>
-            <p>C1 – Fluent</p>
+        <!-- Certifications Section -->
+        <div class="section">
+            <h2>Certifications & Training</h2>
+            <div class="cert-list">
+                <div class="cert-item">
+                    <div class="cert-name">CompTIA CySA+</div>
+                    <div class="cert-issuer">In Progress</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-name">IBM Certified Associate Administrator - QRadar SIEM V7.3.2</div>
+                    <div class="cert-issuer">IBM</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-name">ITIL v4 Foundation Certificate in IT Service Management</div>
+                    <div class="cert-issuer">AXELOS</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-name">Certified in Cybersecurity (CC)</div>
+                    <div class="cert-issuer">ISC2</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-name">IBM Blockchain Foundation Developer & Essentials</div>
+                    <div class="cert-issuer">IBM</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-name">MTA: Windows Server Administration Fundamentals (98-365)</div>
+                    <div class="cert-issuer">Microsoft</div>
+                </div>
+                <div class="cert-item">
+                    <div class="cert-name">MTA: Database Fundamentals (98-364)</div>
+                    <div class="cert-issuer">Microsoft</div>
+                </div>
+            </div>
         </div>
-        <div class="lang-card">
-            <h3>🇫🇷 French</h3>
-            <p>C1 – Fluent</p>
+
+        <!-- Languages Section -->
+        <div class="section">
+            <h2>Languages</h2>
+            <div class="language-item">
+                <span>French</span>
+                <span class="lang-level">C2 (Native)</span>
+            </div>
+            <div class="language-item">
+                <span>English</span>
+                <span class="lang-level">C1 (Professional)</span>
+            </div>
         </div>
-        <div class="lang-card">
-            <h3>🇲🇦 Arabic</h3>
-            <p>Native Speaker</p>
+
+        <!-- Personal Attributes -->
+        <div class="section">
+            <h2>Key Attributes</h2>
+            <div class="skills-grid">
+                <div class="skill-item">Proactive</div>
+                <div class="skill-item">Resourceful</div>
+                <div class="skill-item">Problem-Solver</div>
+                <div class="skill-item">Methodical</div>
+                <div class="skill-item">Thorough</div>
+                <div class="skill-item">Collaborative</div>
+                <div class="skill-item">Clear Communicator</div>
+                <div class="skill-item">Detail-Oriented</div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>Last updated: January 2026 | Available for opportunities in Luxembourg and EU</p>
+            <p>References and additional projects available upon request</p>
         </div>
     </div>
-</section>
 
-<!-- ===== CONTACT SECTION ===== -->
-<section id="contact" class="container contact-section">
-    <h2>Get In Touch</h2>
-    <p class="contact-text">Interested in discussing security challenges, SOC operations, or opportunities in cybersecurity?</p>
-    <div class="cta-buttons">
-        <a href="mailto:mahmoud@el-moudad.cv" class="btn btn-primary">Send Email</a>
-        <button class="btn btn-secondary" onclick="downloadPDF()">📥 Download CV (PDF)</button>
-    </div>
-    <p class="contact-email"><strong>Email:</strong> mahmoud@el-moudad.cv</p>
-</section>
-
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-    <p>&copy; 2024 Mahmoud El-Moudad. All rights reserved.</p>
-    <p>Specializing in SOC Operations, SIEM Administration, and Cybersecurity</p>
-</footer>
-
-<script src="script.js"></script>
-
+    <script>
+        // Smooth scroll behavior is handled by CSS
+        // Add print functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Optional: Add keyboard shortcut for print (Ctrl+P)
+            document.addEventListener('keydown', function(e) {
+                if ((e.ctrlKey || e.metaKey) && e.key === 'p') {
+                    e.preventDefault();
+                    window.print();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
