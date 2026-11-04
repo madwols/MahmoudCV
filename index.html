@@ -21,8 +21,10 @@
             --text-2: #454c58;
             --muted: #7a8391;
             --line: #e6e8ec;
-            --accent: #3d5a80;
-            --accent-soft: #eef2f7;
+            --accent: #3451d1;
+            --accent-2: #06b6d4;
+            --accent-soft: #eef1fd;
+            --ok: #16a34a;
             --chip-bg: #ffffff;
             --chip-border: #dfe3e9;
             --track: #e3e6eb;
@@ -42,8 +44,10 @@
                 --text-2: #b9bfc8;
                 --muted: #8a919c;
                 --line: #262a31;
-                --accent: #8fa9cf;
-                --accent-soft: rgba(143, 169, 207, 0.12);
+                --accent: #8ea2ff;
+                --accent-2: #22d3ee;
+                --accent-soft: rgba(142, 162, 255, 0.12);
+                --ok: #4ade80;
                 --chip-bg: #20242b;
                 --chip-border: #2e333b;
                 --track: #2a2e36;
@@ -273,6 +277,132 @@
             flex-wrap: wrap;
         }
 
+        /* ---------- Extra flair ---------- */
+        body {
+            background-image: radial-gradient(var(--line) 1px, transparent 1px);
+            background-size: 22px 22px;
+        }
+        .page { position: relative; }
+        .page::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            z-index: 2;
+        }
+        .sidebar h1 {
+            font-size: 32px;
+            background: linear-gradient(120deg, var(--strong) 30%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .prompt { color: var(--accent-2); font-weight: 500; }
+        .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 5px 12px 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--ok);
+            background: color-mix(in srgb, var(--ok) 10%, transparent);
+            border: 1px solid color-mix(in srgb, var(--ok) 25%, transparent);
+        }
+        .pulse {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--ok);
+            box-shadow: 0 0 0 0 color-mix(in srgb, var(--ok) 60%, transparent);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            70% { box-shadow: 0 0 0 8px transparent; }
+            100% { box-shadow: 0 0 0 0 transparent; }
+        }
+        .main h2 .num {
+            color: var(--muted);
+            font-weight: 500;
+            letter-spacing: 0;
+            margin-right: -2px;
+        }
+        .main h2::after { background: linear-gradient(90deg, var(--line), transparent); }
+
+        .highlight {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
+            transition: transform .2s ease, box-shadow .2s ease;
+        }
+        .highlight::after {
+            content: '';
+            position: absolute;
+            left: 0; right: 0; bottom: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform .3s ease;
+        }
+        .highlight:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+        .highlight:hover::after { transform: scaleX(1); }
+        .highlight strong {
+            font-size: 26px;
+            letter-spacing: -0.5px;
+            background: linear-gradient(120deg, var(--accent), var(--accent-2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .timeline::before { background: linear-gradient(var(--accent), var(--line) 30%); }
+        .job {
+            padding: 14px 16px;
+            margin-left: -16px;
+            margin-right: -16px;
+            border-radius: 12px;
+            transition: background .2s ease;
+        }
+        .job + .job { margin-top: 12px; }
+        .job::before { left: -10px; top: 20px; }
+        .job:hover { background: var(--accent-soft); }
+        .job.current::before { animation: pulse-accent 2.4s infinite; }
+        @keyframes pulse-accent {
+            0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--accent) 45%, transparent); }
+            70% { box-shadow: 0 0 0 9px transparent; }
+            100% { box-shadow: 0 0 0 0 transparent; }
+        }
+        .date {
+            padding: 2px 8px;
+            border-radius: 6px;
+            background: var(--chip-bg);
+            border: 1px solid var(--chip-border);
+        }
+
+        .tags span { transition: all .15s ease; cursor: default; }
+        .tags span:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .bar i { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
+
+        .edu-item { transition: border-color .2s ease, transform .2s ease; align-items: flex-start; }
+        .edu-item:hover { border-color: var(--accent); transform: translateX(4px); }
+
+        /* Gentle fade-in on load */
+        @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+        .sidebar-top, .main section, .sidebar-bottom { animation: rise .6s ease both; }
+        .main section:nth-of-type(2) { animation-delay: .08s; }
+        .main section:nth-of-type(3) { animation-delay: .16s; }
+        .sidebar-bottom { animation-delay: .1s; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after { animation: none !important; transition: none !important; }
+        }
+
         /* ---------- Responsive ---------- */
         @media (max-width: 900px) {
             .page { grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "top" "main" "bottom"; margin: 0; border-radius: 0; border: 0; }
@@ -304,6 +434,8 @@
             .sidebar-bottom { padding-top: 14px; }
             .main { padding: 28px 30px; }
             .job, .edu-item { break-inside: avoid; }
+            body { background-image: none; }
+            .status { display: none; }
         }
     </style>
 </head>
@@ -313,7 +445,8 @@
         <aside class="sidebar sidebar-top">
             <div>
                 <h1>Mahmoud<br>EL-MOUDAD</h1>
-                <div class="role mono">SOC Engineer · Security Operations &amp; SIEM</div>
+                <div class="role mono"><span class="prompt">&gt;_</span> SOC Engineer · Security Operations &amp; SIEM</div>
+                <div class="status"><span class="pulse"></span>Open to opportunities</div>
             </div>
 
             <div class="side-section">
@@ -396,7 +529,7 @@
         <!-- Main -->
         <main class="main">
             <section>
-                <h2>Profile</h2>
+                <h2><span class="num mono">01</span>Profile</h2>
                 <p class="profile">
                     SOC Analyst in Luxembourg with over 5 years of combined experience across security operations, SIEM engineering, and security-solution integration. Currently handling L1 monitoring and triage for multiple customers on Splunk, Microsoft Sentinel, and EDR platforms (SentinelOne, Microsoft Defender), which gives me first-hand knowledge of the L1 workflow, escalation points, and the context L2 teams need for a clean handoff. Background in QRadar and Sentinel administration, detection-rule tuning aligned with MITRE ATT&amp;CK, log source integration, and SOC process documentation. Comfortable working directly with clients and cross-functional stakeholders.
                 </p>
@@ -408,7 +541,7 @@
             </section>
 
             <section>
-                <h2>Experience</h2>
+                <h2><span class="num mono">02</span>Experience</h2>
                 <div class="timeline">
                     <article class="job current">
                         <div class="job-head">
@@ -474,7 +607,7 @@
             </section>
 
             <section>
-                <h2>Education</h2>
+                <h2><span class="num mono">03</span>Education</h2>
                 <div class="edu">
                     <div class="edu-item">
                         <div>
