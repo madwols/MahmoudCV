@@ -288,12 +288,17 @@
             position: absolute;
             inset: 0 0 auto 0;
             height: 4px;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
+            background: linear-gradient(90deg, var(--accent), var(--accent-2), var(--accent));
+            background-size: 200% 100%;
+            animation: flow 6s linear infinite;
             z-index: 2;
         }
+        @keyframes flow { to { background-position: -200% 0; } }
         .sidebar h1 {
             font-size: 32px;
-            background: linear-gradient(120deg, var(--strong) 30%, var(--accent) 100%);
+            background: linear-gradient(110deg, var(--strong) 35%, var(--accent) 50%, var(--accent-2) 58%, var(--strong) 72%);
+            background-size: 250% 100%;
+            animation: shimmer 7s ease-in-out infinite;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -334,7 +339,7 @@
             position: relative;
             overflow: hidden;
             border: 1px solid color-mix(in srgb, var(--accent) 14%, transparent);
-            transition: transform .2s ease, box-shadow .2s ease;
+            transition: scale .2s ease, box-shadow .2s ease;
         }
         .highlight::after {
             content: '';
@@ -346,7 +351,7 @@
             transform-origin: left;
             transition: transform .3s ease;
         }
-        .highlight:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+        .highlight:hover { scale: 1.03; box-shadow: var(--shadow); }
         .highlight:hover::after { transform: scaleX(1); }
         .highlight strong {
             font-size: 26px;
@@ -389,8 +394,74 @@
         }
         .bar i { background: linear-gradient(90deg, var(--accent), var(--accent-2)); }
 
-        .edu-item { transition: border-color .2s ease, transform .2s ease; align-items: flex-start; }
-        .edu-item:hover { border-color: var(--accent); transform: translateX(4px); }
+        .edu-item { transition: border-color .2s ease, translate .2s ease; align-items: flex-start; }
+        .edu-item:hover { border-color: var(--accent); translate: 4px 0; }
+
+        /* ---------- Motion ---------- */
+        @keyframes shimmer { 0%, 100% { background-position: 100% 0; } 50% { background-position: 0% 0; } }
+
+        .cursor {
+            display: inline-block;
+            width: 7px; height: 1.05em;
+            margin-left: 4px;
+            vertical-align: -2px;
+            background: var(--accent-2);
+            animation: blink 1.1s steps(1) infinite;
+        }
+        @keyframes blink { 50% { opacity: 0; } }
+
+        /* Drifting colour blobs behind the page */
+        .blob {
+            position: fixed;
+            width: 520px; height: 520px;
+            border-radius: 50%;
+            filter: blur(90px);
+            opacity: 0.18;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .b1 { background: var(--accent); top: -160px; left: -140px; animation: drift1 22s ease-in-out infinite alternate; }
+        .b2 { background: var(--accent-2); bottom: -180px; right: -140px; animation: drift2 26s ease-in-out infinite alternate; }
+        @keyframes drift1 { to { transform: translate(180px, 140px) scale(1.15); } }
+        @keyframes drift2 { to { transform: translate(-200px, -120px) scale(1.1); } }
+
+        /* Tags pop in one after another */
+        @keyframes pop { from { opacity: 0; transform: translateY(6px) scale(.9); } to { opacity: 1; transform: none; } }
+        .tags span { animation: pop .4s cubic-bezier(.2, .8, .3, 1.3) both; }
+        .tags span:nth-child(1) { animation-delay: .25s; }
+        .tags span:nth-child(2) { animation-delay: .32s; }
+        .tags span:nth-child(3) { animation-delay: .39s; }
+        .tags span:nth-child(4) { animation-delay: .46s; }
+        .tags span:nth-child(5) { animation-delay: .53s; }
+        .tags span:nth-child(6) { animation-delay: .6s; }
+
+        /* Highlight cards rise in sequence, then float gently */
+        .highlight { animation: rise .6s ease both, float 5s ease-in-out 1s infinite; }
+        .highlight:nth-child(2) { animation-delay: .15s, 1.6s; }
+        .highlight:nth-child(3) { animation-delay: .3s, 2.2s; }
+        .highlight:hover { animation-play-state: paused; }
+        @keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -4px; } }
+
+        /* Language bars fill up */
+        @keyframes fill { from { transform: scaleX(0); } }
+        .bar i { transform-origin: left; animation: fill 1.2s cubic-bezier(.2, .7, .2, 1) .5s both; }
+
+        /* Scroll-linked effects (browsers that support them; others just show everything) */
+        @supports (animation-timeline: view()) {
+            @keyframes slide-in { from { opacity: .15; transform: translateX(28px); } to { opacity: 1; transform: none; } }
+            .job, .edu-item {
+                animation: slide-in linear both;
+                animation-timeline: view();
+                animation-range: entry 0% entry 60%;
+            }
+            @keyframes draw { from { transform: scaleY(0); } to { transform: scaleY(1); } }
+            .timeline::before {
+                transform-origin: top;
+                animation: draw linear both;
+                animation-timeline: view();
+                animation-range: entry 10% cover 60%;
+            }
+        }
 
         /* Gentle fade-in on load */
         @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
@@ -435,17 +506,19 @@
             .main { padding: 28px 30px; }
             .job, .edu-item { break-inside: avoid; }
             body { background-image: none; }
-            .status { display: none; }
+            .status, .blob, .cursor { display: none; }
         }
     </style>
 </head>
 <body>
+    <div class="blob b1" aria-hidden="true"></div>
+    <div class="blob b2" aria-hidden="true"></div>
     <div class="page">
         <!-- Sidebar -->
         <aside class="sidebar sidebar-top">
             <div>
                 <h1>Mahmoud<br>EL-MOUDAD</h1>
-                <div class="role mono"><span class="prompt">&gt;_</span> SOC Engineer · Security Operations &amp; SIEM</div>
+                <div class="role mono"><span class="prompt">&gt;_</span> SOC Engineer · Security Operations &amp; SIEM<span class="cursor"></span></div>
                 <div class="status"><span class="pulse"></span>Open to opportunities</div>
             </div>
 
