@@ -91,21 +91,6 @@
             border-right: 1px solid var(--line);
         }
 
-        .monogram {
-            width: 64px;
-            height: 64px;
-            border-radius: 16px;
-            display: grid;
-            place-items: center;
-            background: var(--surface);
-            border: 1.5px solid var(--accent);
-            color: var(--accent);
-            font-weight: 700;
-            font-size: 22px;
-            letter-spacing: 1px;
-            margin-bottom: 20px;
-        }
-
         .sidebar h1 {
             color: var(--strong);
             font-size: 28px;
@@ -303,7 +288,7 @@
             @page { margin: 12mm; }
             body { background: #fff; font-size: 12px; }
             .page { margin: 0; box-shadow: none; border: 0; grid-template-columns: 260px 1fr; }
-            .sidebar, .highlight, .bar i, .monogram {
+            .sidebar, .highlight, .bar i {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
@@ -318,7 +303,6 @@
         <!-- Sidebar -->
         <aside class="sidebar">
             <div>
-                <div class="monogram">ME</div>
                 <h1>Mahmoud<br>EL-MOUDAD</h1>
                 <div class="role mono">SOC Engineer · Security Operations &amp; SIEM</div>
             </div>
