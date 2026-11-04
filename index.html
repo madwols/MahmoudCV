@@ -55,7 +55,7 @@
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); }
+        html { scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 16px); overflow-x: clip; }
 
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -64,7 +64,7 @@
             font-size: 16px;
             line-height: 1.65;
             -webkit-font-smoothing: antialiased;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         a { color: inherit; text-decoration: none; }
@@ -365,7 +365,7 @@
         .hero-text > *:nth-child(4) { animation-delay: .24s; }
         .hero-text > *:nth-child(5) { animation-delay: .32s; }
         .hero-text > *:nth-child(6) { animation-delay: .4s; }
-        .console-wrap { animation: rise .9s cubic-bezier(.2, .7, .2, 1) .3s both; }
+        .console-wrap { animation: rise .9s cubic-bezier(.2, .7, .2, 1) .3s backwards; }
 
         /* ---------- Stats ---------- */
         .stats { position: relative; z-index: 2; margin-top: -48px; }
@@ -697,30 +697,107 @@
         .linkish { background: none; border: 0; color: inherit; font: inherit; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
         .linkish:hover { color: var(--accent); }
 
-        /* ---------- Scroll effects (supported browsers only; content is always visible otherwise) ---------- */
-        @supports (animation-timeline: view()) {
-            @keyframes reveal { from { opacity: 0; translate: 0 36px; } to { opacity: 1; translate: 0 0; } }
-            .reveal {
-                animation: reveal linear both;
-                animation-timeline: view();
-                animation-range: entry 0% entry 55%;
-            }
-            @keyframes draw { from { transform: scaleY(0); } to { transform: scaleY(1); } }
-            .timeline::before {
-                transform-origin: top;
-                animation: draw linear both;
-                animation-timeline: view();
-                animation-range: entry 0% cover 55%;
-            }
-            @keyframes grow { from { transform: scaleX(0); } }
-            .lang-bar i {
-                animation: grow linear both;
-                animation-timeline: view();
-                animation-range: entry 20% cover 40%;
-            }
+        /* ---------- Scroll effects (driven by --p, set from JS; defaults keep everything visible) ---------- */
+        @supports (animation-timeline: scroll()) {
             @keyframes grow-p { from { transform: scaleX(0); } to { transform: scaleX(1); } }
             .progress { animation: grow-p linear both; animation-timeline: scroll(root); }
         }
+
+        [data-fx] { --p: 1; opacity: var(--p); }
+        [data-fx="up"]    { transform: translateY(calc((1 - var(--p)) * 60px)) scale(calc(0.96 + var(--p) * 0.04)); }
+        [data-fx="left"]  { transform: translateX(calc((1 - var(--p)) * -90px)) rotate(calc((1 - var(--p)) * -3deg)); }
+        [data-fx="right"] { transform: translateX(calc((1 - var(--p)) * 90px)) rotate(calc((1 - var(--p)) * 3deg)); }
+        [data-fx="flip"]  { transform: perspective(900px) rotateX(calc((1 - var(--p)) * -75deg)) translateY(calc((1 - var(--p)) * 30px)); transform-origin: 50% 100%; }
+        [data-fx="zoom"]  { transform: scale(calc(0.82 + var(--p) * 0.18)); }
+        [data-fx="blur"]  { filter: blur(calc((1 - var(--p)) * 10px)); transform: translateY(calc((1 - var(--p)) * 30px)); }
+
+        .section-head { position: relative; }
+        .section-head[data-num]::before {
+            content: attr(data-num);
+            position: absolute;
+            right: 0;
+            top: 50%;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(110px, 18vw, 220px);
+            line-height: 1;
+            letter-spacing: -0.06em;
+            color: transparent;
+            -webkit-text-stroke: 1.5px var(--line);
+            transform: translateY(calc(-50% + (1 - var(--p)) * 120px));
+            pointer-events: none;
+            z-index: -1;
+        }
+        .section-head > * { position: relative; }
+
+        /* Hero exit as you scroll away */
+        .hero { --h: 0; }
+        .hero-text { transform: translateY(calc(var(--h) * -120px)); opacity: calc(1 - var(--h) * 1.3); }
+        .console-wrap {
+            transform: perspective(1000px) translateY(calc(var(--h) * 60px)) rotateX(calc(var(--h) * 28deg)) scale(calc(1 - var(--h) * 0.18));
+            opacity: calc(1 - var(--h) * 1.1);
+        }
+        #net { transform: translateY(calc(var(--h) * 140px)); }
+
+        /* Timeline fill + scanner */
+        .timeline { --t: 1; }
+        .timeline::before { transform-origin: top; transform: scaleY(var(--t)); }
+        .scanner {
+            position: absolute;
+            left: 175px;
+            top: calc(10px + var(--t) * (100% - 30px));
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: var(--accent-2);
+            box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent-2) 25%, transparent), 0 0 24px 6px color-mix(in srgb, var(--accent-2) 55%, transparent);
+            z-index: 2;
+            opacity: calc(var(--t) * 8);
+        }
+        .scanner::after {
+            content: '';
+            position: absolute;
+            left: 50%; bottom: 100%;
+            width: 2px; height: 70px;
+            translate: -50% 0;
+            background: linear-gradient(transparent, var(--accent-2));
+        }
+
+        /* Language bars fill with their panel */
+        .lang-bar i { transform: scaleX(var(--p, 1)); transition: transform .1s linear; }
+
+        /* Marquee bands */
+        .marquee {
+            --sy: 0;
+            margin: 110px 0 -10px;
+            padding: 18px 0;
+            overflow: hidden;
+            rotate: -2deg;
+            width: 104%;
+            margin-left: -2%;
+            background: var(--text);
+            color: var(--bg);
+            box-shadow: var(--shadow);
+        }
+        .marquee.alt { rotate: 2deg; background: linear-gradient(100deg, var(--accent), var(--accent-2)); color: #fff; margin-bottom: -20px; }
+        .marquee-row { white-space: nowrap; overflow: hidden; }
+        .marquee-row + .marquee-row { margin-top: 6px; }
+        .marquee-track {
+            display: inline-flex;
+            align-items: center;
+            gap: 28px;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+            font-size: clamp(26px, 4vw, 46px);
+            letter-spacing: -0.02em;
+            line-height: 1.25;
+            will-change: transform;
+        }
+        .marquee-track i { font-style: normal; font-size: .5em; opacity: .7; color: var(--accent-2); }
+        .marquee.alt .marquee-track i { color: #fff; }
+        .r1 .marquee-track { transform: translateX(calc(var(--sy) * -0.35px)); }
+        .r2 .marquee-track { transform: translateX(calc(-60% + var(--sy) * 0.35px)); }
+        .r2 .marquee-track span { color: transparent; -webkit-text-stroke: 1.2px var(--bg); }
+        .marquee.alt .r2 .marquee-track span { -webkit-text-stroke-color: #fff; }
 
         /* ---------- Responsive ---------- */
         @media (max-width: 980px) {
@@ -749,6 +826,9 @@
             .section-head { margin-bottom: 32px; }
             .skills-grid { grid-template-columns: 1fr; }
             .timeline::before { left: 6px; }
+            .scanner { left: 1px; }
+            .marquee { margin-top: 80px; padding: 12px 0; }
+            [data-fx="left"], [data-fx="right"] { transform: translateY(calc((1 - var(--p)) * 50px)); }
             .exp { grid-template-columns: 1fr; }
             .exp-node { left: 0; top: 4px; }
             .exp-when { text-align: left; padding: 0 0 10px 30px; }
@@ -782,6 +862,9 @@
             .section-head { margin-bottom: 12px; }
             h2.title { font-size: 16pt; }
             .exp, .skill-card, .cert, .panel { break-inside: avoid; }
+            [data-fx] { opacity: 1 !important; transform: none !important; filter: none !important; }
+            .marquee, .scanner, .section-head::before { display: none !important; }
+            .timeline::before { transform: none !important; }
             .about-grid { grid-template-columns: 1fr; }
             .skills-grid { grid-template-columns: 1fr 1fr; }
         }
@@ -863,34 +946,40 @@
         </div>
     </div>
 
+
+    <div class="marquee" aria-hidden="true">
+        <div class="marquee-row r1"><div class="marquee-track"><span>IBM QRadar</span><i>✦</i><span>Microsoft Sentinel</span><i>✦</i><span>Splunk</span><i>✦</i><span>SentinelOne</span><i>✦</i><span>Microsoft Defender</span><i>✦</i><span>MITRE ATT&amp;CK</span><i>✦</i><span>Threat Intel</span><i>✦</i><span>IBM QRadar</span><i>✦</i><span>Microsoft Sentinel</span><i>✦</i><span>Splunk</span><i>✦</i><span>SentinelOne</span><i>✦</i><span>Microsoft Defender</span><i>✦</i><span>MITRE ATT&amp;CK</span><i>✦</i><span>Threat Intel</span><i>✦</i><span>IBM QRadar</span><i>✦</i><span>Microsoft Sentinel</span><i>✦</i><span>Splunk</span><i>✦</i><span>SentinelOne</span><i>✦</i><span>Microsoft Defender</span><i>✦</i><span>MITRE ATT&amp;CK</span><i>✦</i><span>Threat Intel</span><i>✦</i></div></div>
+        <div class="marquee-row r2"><div class="marquee-track"><span>Detection Engineering</span><i>✦</i><span>Incident Response</span><i>✦</i><span>L1 → L2 Triage</span><i>✦</i><span>Log Integration</span><i>✦</i><span>Keycloak</span><i>✦</i><span>Azure</span><i>✦</i><span>Python</span><i>✦</i><span>PowerShell</span><i>✦</i><span>Detection Engineering</span><i>✦</i><span>Incident Response</span><i>✦</i><span>L1 → L2 Triage</span><i>✦</i><span>Log Integration</span><i>✦</i><span>Keycloak</span><i>✦</i><span>Azure</span><i>✦</i><span>Python</span><i>✦</i><span>PowerShell</span><i>✦</i><span>Detection Engineering</span><i>✦</i><span>Incident Response</span><i>✦</i><span>L1 → L2 Triage</span><i>✦</i><span>Log Integration</span><i>✦</i><span>Keycloak</span><i>✦</i><span>Azure</span><i>✦</i><span>Python</span><i>✦</i><span>PowerShell</span><i>✦</i></div></div>
+    </div>
+
     <main>
         <!-- About -->
         <section class="block" id="about">
             <div class="wrap">
-                <div class="section-head reveal">
+                <div class="section-head" data-fx="blur" data-num="01">
                     <div class="eyebrow mono">01 / About</div>
                     <h2 class="title">From noisy alerts to clear, <span class="grad-text">actionable</span> incidents.</h2>
                 </div>
                 <div class="about-grid">
-                    <div class="about-text reveal">
+                    <div class="about-text" data-fx="left">
                         <p>SOC Analyst in Luxembourg with over 5 years of combined experience across security operations, SIEM engineering, and security-solution integration.</p>
                         <p>Currently handling L1 monitoring and triage for multiple customers on Splunk, Microsoft Sentinel, and EDR platforms (SentinelOne, Microsoft Defender), which gives me first-hand knowledge of the L1 workflow, escalation points, and the context L2 teams need for a clean handoff.</p>
                         <p>Background in QRadar and Sentinel administration, detection-rule tuning aligned with MITRE ATT&amp;CK, log source integration, and SOC process documentation. Comfortable working directly with clients and cross-functional stakeholders.</p>
                     </div>
                     <div class="focus">
-                        <div class="focus-item reveal">
+                        <div class="focus-item" data-fx="right">
                             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h4l3-8 4 16 3-8h6"/></svg></div>
                             <div><h3>Monitoring &amp; triage</h3><p>Multi-customer alert handling with clear escalation criteria and SLAs</p></div>
                         </div>
-                        <div class="focus-item reveal">
+                        <div class="focus-item" data-fx="right">
                             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M8 11h6M11 8v6"/></svg></div>
                             <div><h3>Detection engineering</h3><p>Use cases and rule tuning mapped to MITRE ATT&amp;CK</p></div>
                         </div>
-                        <div class="focus-item reveal">
+                        <div class="focus-item" data-fx="right">
                             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></div>
                             <div><h3>SIEM administration</h3><p>Deployment, log source integration and platform health</p></div>
                         </div>
-                        <div class="focus-item reveal">
+                        <div class="focus-item" data-fx="right">
                             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8.5-7 10-4-1.5-7-5-7-10V6z"/><path d="M12 8v4M12 16h.01"/></svg></div>
                             <div><h3>Incident response</h3><p>Investigation support, post-incident analysis, client communication</p></div>
                         </div>
@@ -902,13 +991,13 @@
         <!-- Experience -->
         <section class="block" id="experience">
             <div class="wrap">
-                <div class="section-head reveal">
+                <div class="section-head" data-fx="blur" data-num="02">
                     <div class="eyebrow mono">02 / Experience</div>
                     <h2 class="title">From security integration to the <span class="grad-text">SOC floor</span>.</h2>
                 </div>
 
-                <div class="timeline">
-                    <article class="exp current reveal">
+                <div class="timeline" id="timeline"><span class="scanner" aria-hidden="true"></span>
+                    <article class="exp current" data-fx="up">
                         <div class="exp-when mono"><b>10/2024 – Present</b><span class="now">Current</span></div>
                         <span class="exp-node"></span>
                         <div class="exp-card">
@@ -925,7 +1014,7 @@
                         </div>
                     </article>
 
-                    <article class="exp reveal">
+                    <article class="exp" data-fx="up">
                         <div class="exp-when mono"><b>11/2022 – 09/2024</b></div>
                         <span class="exp-node"></span>
                         <div class="exp-card">
@@ -945,7 +1034,7 @@
                         </div>
                     </article>
 
-                    <article class="exp reveal">
+                    <article class="exp" data-fx="up">
                         <div class="exp-when mono"><b>03/2022 – 10/2022</b></div>
                         <span class="exp-node"></span>
                         <div class="exp-card">
@@ -960,7 +1049,7 @@
                         </div>
                     </article>
 
-                    <article class="exp reveal">
+                    <article class="exp" data-fx="up">
                         <div class="exp-when mono"><b>04/2019 – 02/2022</b></div>
                         <span class="exp-node"></span>
                         <div class="exp-card">
@@ -983,37 +1072,37 @@
         <!-- Skills -->
         <section class="block" id="skills">
             <div class="wrap">
-                <div class="section-head reveal">
+                <div class="section-head" data-fx="blur" data-num="03">
                     <div class="eyebrow mono">03 / Skills</div>
                     <h2 class="title">The toolkit behind the <span class="grad-text">detections</span>.</h2>
                 </div>
                 <div class="skills-grid">
-                    <div class="skill-card reveal">
+                    <div class="skill-card" data-fx="left">
                         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m7 15 4-4 3 3 5-6"/></svg></div>
                         <h3>SIEM &amp; Detection Engineering</h3>
                         <div class="tags"><span>IBM QRadar</span><span>Microsoft Sentinel</span><span>Splunk</span><span>Rule tuning</span><span>Log source integration</span><span>MITRE ATT&amp;CK</span></div>
                     </div>
-                    <div class="skill-card reveal">
+                    <div class="skill-card" data-fx="up">
                         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></div>
                         <h3>EDR &amp; Monitoring</h3>
                         <div class="tags"><span>Microsoft Defender</span><span>SentinelOne</span></div>
                     </div>
-                    <div class="skill-card reveal">
+                    <div class="skill-card" data-fx="right">
                         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></svg></div>
                         <h3>Incident Handling</h3>
                         <div class="tags"><span>L1 triage</span><span>Escalation to L2</span><span>Threat correlation</span><span>Post-incident analysis</span><span>SOC procedures &amp; SOPs</span></div>
                     </div>
-                    <div class="skill-card reveal">
+                    <div class="skill-card" data-fx="left">
                         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6v4H9zM4 17h6v4H4zM14 17h6v4h-6z"/><path d="M12 7v5M7 17v-2.5h10V17"/></svg></div>
                         <h3>Security Integration</h3>
                         <div class="tags"><span>Guardium</span><span>Tripwire Enterprise</span><span>Keycloak</span><span>Passbolt</span><span>Requirements</span><span>Architecture docs</span></div>
                     </div>
-                    <div class="skill-card reveal">
+                    <div class="skill-card" data-fx="up">
                         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m4 17 6-5-6-5M12 19h8"/></svg></div>
                         <h3>Scripting</h3>
                         <div class="tags"><span>Python</span><span>Bash</span><span>PowerShell</span></div>
                     </div>
-                    <div class="skill-card reveal">
+                    <div class="skill-card" data-fx="right">
                         <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 19a4.5 4.5 0 1 0-1.4-8.8A6 6 0 1 0 6 16.5"/><path d="M6 19h11.5"/></svg></div>
                         <h3>Infrastructure &amp; Cloud</h3>
                         <div class="tags"><span>Active Directory</span><span>Keycloak</span><span>Microsoft Azure</span><span>VMware vCenter</span><span>Red Hat Linux</span></div>
@@ -1022,39 +1111,43 @@
             </div>
         </section>
 
+    <div class="marquee alt" aria-hidden="true">
+        <div class="marquee-row r1"><div class="marquee-track"><span>IBM QRadar</span><i>✦</i><span>Microsoft Sentinel</span><i>✦</i><span>Splunk</span><i>✦</i><span>SentinelOne</span><i>✦</i><span>Microsoft Defender</span><i>✦</i><span>MITRE ATT&amp;CK</span><i>✦</i><span>Threat Intel</span><i>✦</i><span>IBM QRadar</span><i>✦</i><span>Microsoft Sentinel</span><i>✦</i><span>Splunk</span><i>✦</i><span>SentinelOne</span><i>✦</i><span>Microsoft Defender</span><i>✦</i><span>MITRE ATT&amp;CK</span><i>✦</i><span>Threat Intel</span><i>✦</i><span>IBM QRadar</span><i>✦</i><span>Microsoft Sentinel</span><i>✦</i><span>Splunk</span><i>✦</i><span>SentinelOne</span><i>✦</i><span>Microsoft Defender</span><i>✦</i><span>MITRE ATT&amp;CK</span><i>✦</i><span>Threat Intel</span><i>✦</i></div></div>
+        <div class="marquee-row r2"><div class="marquee-track"><span>Detection Engineering</span><i>✦</i><span>Incident Response</span><i>✦</i><span>L1 → L2 Triage</span><i>✦</i><span>Log Integration</span><i>✦</i><span>Keycloak</span><i>✦</i><span>Azure</span><i>✦</i><span>Python</span><i>✦</i><span>PowerShell</span><i>✦</i><span>Detection Engineering</span><i>✦</i><span>Incident Response</span><i>✦</i><span>L1 → L2 Triage</span><i>✦</i><span>Log Integration</span><i>✦</i><span>Keycloak</span><i>✦</i><span>Azure</span><i>✦</i><span>Python</span><i>✦</i><span>PowerShell</span><i>✦</i><span>Detection Engineering</span><i>✦</i><span>Incident Response</span><i>✦</i><span>L1 → L2 Triage</span><i>✦</i><span>Log Integration</span><i>✦</i><span>Keycloak</span><i>✦</i><span>Azure</span><i>✦</i><span>Python</span><i>✦</i><span>PowerShell</span><i>✦</i></div></div>
+    </div>
         <!-- Certifications -->
         <section class="block" id="certifications">
             <div class="wrap">
-                <div class="section-head reveal">
+                <div class="section-head" data-fx="blur" data-num="04">
                     <div class="eyebrow mono">04 / Certifications</div>
                     <h2 class="title">Certified, and still <span class="grad-text">levelling up</span>.</h2>
                 </div>
                 <div class="certs-grid">
-                    <div class="cert reveal">
+                    <div class="cert" data-fx="flip">
                         <div class="cert-top"><span class="issuer mono">CompTIA</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
                         <h3>CompTIA Cybersecurity Analyst (CySA+)</h3>
                     </div>
-                    <div class="cert reveal">
+                    <div class="cert" data-fx="flip">
                         <div class="cert-top"><span class="issuer mono">IBM</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
                         <h3>IBM Certified Associate Administrator — IBM QRadar SIEM V7.3.2</h3>
                     </div>
-                    <div class="cert reveal">
+                    <div class="cert" data-fx="flip">
                         <div class="cert-top"><span class="issuer mono">ISC2</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
                         <h3>Certified in Cybersecurity (CC)</h3>
                     </div>
-                    <div class="cert reveal">
+                    <div class="cert" data-fx="flip">
                         <div class="cert-top"><span class="issuer mono">AXELOS</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
                         <h3>ITIL® v4 Foundation — IT Service Management</h3>
                     </div>
-                    <div class="cert reveal">
+                    <div class="cert" data-fx="flip">
                         <div class="cert-top"><span class="issuer mono">IBM</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
                         <h3>IBM Blockchain Foundation Developer · IBM Blockchain Essentials</h3>
                     </div>
-                    <div class="cert reveal">
+                    <div class="cert" data-fx="flip">
                         <div class="cert-top"><span class="issuer mono">Microsoft</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></svg></div>
                         <h3>MTA: Windows Server Administration Fundamentals (98-365) · Database Fundamentals, SQL Server (98-364)</h3>
                     </div>
-                    <div class="cert wip reveal">
+                    <div class="cert wip" data-fx="flip">
                         <div class="cert-top"><span class="issuer mono">Security Blue Team</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
                         <h3>BTL2 — Blue Team Level 2 <small>(in progress)</small></h3>
                         <div class="bar"><i></i></div>
@@ -1066,12 +1159,12 @@
         <!-- Education & Languages -->
         <section class="block" id="education">
             <div class="wrap">
-                <div class="section-head reveal">
+                <div class="section-head" data-fx="blur" data-num="05">
                     <div class="eyebrow mono">05 / Education &amp; Languages</div>
                     <h2 class="title">Engineering roots, <span class="grad-text">digital</span> mindset.</h2>
                 </div>
                 <div class="edu-grid">
-                    <div class="panel reveal">
+                    <div class="panel" data-fx="left">
                         <h3>Education</h3>
                         <div class="degree">
                             <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg></div>
@@ -1090,7 +1183,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel reveal">
+                    <div class="panel" data-fx="right">
                         <h3>Languages</h3>
                         <div class="lang">
                             <div class="lang-row"><b>French</b><span class="mono">C2 · full professional</span></div>
@@ -1111,7 +1204,7 @@
 
         <!-- Contact -->
         <div class="wrap">
-            <section class="contact reveal" id="contact">
+            <section class="contact" id="contact" data-fx="zoom">
                 <div class="eyebrow mono">06 / Contact</div>
                 <h2>Let's secure something together.</h2>
                 <p>Open to SOC and security operations roles in Luxembourg and across the EU.</p>
@@ -1174,6 +1267,44 @@
                 }, { threshold: 0.6 });
                 document.querySelectorAll('[data-count]').forEach(function (el) { counter.observe(el); });
             }
+        }
+
+        /* Scroll-driven effects */
+        var fxEls = Array.prototype.slice.call(document.querySelectorAll('[data-fx], .panel'));
+        var heroEl = document.getElementById('top');
+        var tl = document.getElementById('timeline');
+        var root = document.documentElement;
+        var marquees = document.querySelectorAll('.marquee');
+        function ease(x) { return x * x * (3 - 2 * x); }
+        function clamp(x) { return x < 0 ? 0 : x > 1 ? 1 : x; }
+        var ticking = false;
+        function fx() {
+            ticking = false;
+            var vh = window.innerHeight;
+            for (var i = 0; i < fxEls.length; i++) {
+                var r = fxEls[i].getBoundingClientRect();
+                var p = clamp((vh - r.top) / (vh * 0.42));
+                fxEls[i].style.setProperty('--p', ease(p).toFixed(3));
+            }
+            var hr = heroEl.getBoundingClientRect();
+            heroEl.style.setProperty('--h', clamp(-hr.top / (hr.height * 0.8)).toFixed(3));
+            if (tl) {
+                var tr = tl.getBoundingClientRect();
+                tl.style.setProperty('--t', clamp((vh * 0.6 - tr.top) / tr.height).toFixed(3));
+            }
+            marquees.forEach(function (m) {
+                var mr = m.getBoundingClientRect();
+                m.style.setProperty('--sy', (vh - mr.top).toFixed(0));
+            });
+        }
+        if (!reduce) {
+            window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(fx); } }, { passive: true });
+            window.addEventListener('resize', fx);
+            window.addEventListener('beforeprint', function () {
+                fxEls.forEach(function (el) { el.style.setProperty('--p', 1); });
+                if (tl) tl.style.setProperty('--t', 1);
+            });
+            fx();
         }
 
         /* Spotlight on skill cards */
