@@ -73,6 +73,8 @@
             margin: 48px auto;
             display: grid;
             grid-template-columns: 340px 1fr;
+            grid-template-rows: auto 1fr;
+            grid-template-areas: "top main" "bottom main";
             background: var(--surface);
             border-radius: 20px;
             overflow: hidden;
@@ -90,6 +92,9 @@
             gap: 36px;
             border-right: 1px solid var(--line);
         }
+        .sidebar-top { grid-area: top; padding-bottom: 18px; }
+        .sidebar-bottom { grid-area: bottom; padding-top: 18px; }
+        .main { grid-area: main; }
 
         .sidebar h1 {
             color: var(--strong);
@@ -270,8 +275,10 @@
 
         /* ---------- Responsive ---------- */
         @media (max-width: 900px) {
-            .page { grid-template-columns: 1fr; margin: 0; border-radius: 0; border: 0; }
-            .sidebar { padding: 40px 20px; }
+            .page { grid-template-columns: 1fr; grid-template-rows: auto; grid-template-areas: "top" "main" "bottom"; margin: 0; border-radius: 0; border: 0; }
+            .sidebar { padding: 40px 20px; border-right: 0; }
+            .sidebar-top { border-bottom: 1px solid var(--line); }
+            .sidebar-bottom { border-top: 1px solid var(--line); }
             .main { padding: 36px 20px; }
             .highlights { grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
             .highlight { padding: 12px; }
@@ -287,12 +294,14 @@
         @media print {
             @page { margin: 12mm; }
             body { background: #fff; font-size: 12px; }
-            .page { margin: 0; box-shadow: none; border: 0; grid-template-columns: 260px 1fr; }
+            .page { margin: 0; box-shadow: none; border: 0; grid-template-columns: 260px 1fr; grid-template-rows: auto 1fr; grid-template-areas: "top main" "bottom main"; }
             .sidebar, .highlight, .bar i {
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
             }
             .sidebar { padding: 28px 22px; }
+            .sidebar-top { padding-bottom: 14px; }
+            .sidebar-bottom { padding-top: 14px; }
             .main { padding: 28px 30px; }
             .job, .edu-item { break-inside: avoid; }
         }
@@ -301,7 +310,7 @@
 <body>
     <div class="page">
         <!-- Sidebar -->
-        <aside class="sidebar">
+        <aside class="sidebar sidebar-top">
             <div>
                 <h1>Mahmoud<br>EL-MOUDAD</h1>
                 <div class="role mono">SOC Engineer · Security Operations &amp; SIEM</div>
@@ -325,6 +334,9 @@
                 </ul>
             </div>
 
+        </aside>
+
+        <aside class="sidebar sidebar-bottom">
             <div class="side-section">
                 <h2>Technical Skills</h2>
                 <div class="skill-group">
